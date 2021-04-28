@@ -13,8 +13,8 @@ const Navigation = () => {
 
   return (
     <NavWrapper>
-      {navItemArray.map(([menuTitle, itemList], idx) =>
-        <NavContent key={`navContent-${idx}`}>
+      {navItemArray.map(([menuTitle, itemList], index) =>
+        <NavContent key={index}>
           <NavSpan>{menuTitle}</NavSpan> <Dropdown list={itemList} ></Dropdown>
         </NavContent>
       )}

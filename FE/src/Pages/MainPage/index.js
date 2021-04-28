@@ -1,20 +1,19 @@
-import { useReducer } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { FlexContainer, Container } from 'Components/commons/base.js';
 import Header from 'Components/Header/Header.js';
 import Tabs from 'Components/Tabs/Tabs';
 import DetailProductModal from 'Components/Modal/DetailProductModal';
 import MainDish from 'Pages/MainPage/MainDish';
-import { reducer, reducerInitialState } from 'util/reducer';
 
 const MainPage = () => {
-  const [modalState, dispatchModal] = useReducer(reducer, reducerInitialState);
+  const [modalState, setModalState] = useState(null);
 
   return (
     <MainPageLayout>
       <DetailProductModal {...{ modalState }} />
       <Header />
-      <Tabs  {...{ dispatchModal }} />
+      <Tabs  {...{ setModalState }} />
       <MainDishSection>
         <MainDish />
       </MainDishSection>

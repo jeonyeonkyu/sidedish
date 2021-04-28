@@ -4,18 +4,17 @@ import SpecialLabelTag from 'Components/commons/SpecialLabelTag';
 import API from 'util/API';
 import { formatPriceAsNumber } from 'util/serviceUtils';
 
-const TabCard = ({ item, dispatchModal }) => {
+const TabCard = ({ item, setModalState }) => {
 
   const { detail_hash, delivery_type, title,
     description, n_price, s_price, badge } = item;
 
   const fetchModalState = ({ hash }) => async () => {
-    dispatchModal({ type: 'LOADING' });
     try {
       const { data } = await API.get.detail({ hash });
-      dispatchModal({ type: 'SUCCESS', data: { title, badge, ...data } });
-    } catch (e) {
-      dispatchModal({ type: 'ERROR', error: e });
+      setModalState({ status: 'success', title, badge, ...data });
+    } catch ({ status }) {
+      setModalState({ status });
     }
   };
 
@@ -42,7 +41,7 @@ const TabCard = ({ item, dispatchModal }) => {
       </PriceWrapper>
 
       {badge?.map((badge, idx) => {
-        return (<SpecialLabelTag key={`TabSpecialLabel-${idx}`} badge={badge} />);
+        return (<SpecialLabelTag key={idx} badge={badge} />);
       })}
     </CardWrapper>
   )
