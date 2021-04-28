@@ -5,6 +5,7 @@ import com.codesquad.team14.domain.Item;
 import com.codesquad.team14.dto.CategoryDto;
 import com.codesquad.team14.dto.DetailedItemDto;
 import com.codesquad.team14.dto.ItemDto;
+import com.codesquad.team14.dto.requestDto.RequestItemDto;
 import com.codesquad.team14.exception.CategoryNotFoundException;
 import com.codesquad.team14.exception.ItemNotFoundException;
 import com.codesquad.team14.repository.CategoryRepository;
@@ -36,19 +37,16 @@ public class CategoryService {
 
     public List<ItemDto> readAllByCategoryName(String categoryName) {
         Category category = categoryRepository.findCategoryByName(categoryName).orElseThrow(CategoryNotFoundException::new);
-        return category.getItems().stream()
-                .map(ItemDto::from)
-                .collect(Collectors.toList());
+        return category.getItems().values().stream().map(ItemDto::from).collect(Collectors.toList());
     }
 
     public DetailedItemDto readDetailedItem(String categoryName, Long itemId) {
         Category category = categoryRepository.findCategoryByName(categoryName).orElseThrow(CategoryNotFoundException::new);
-        Item item = category.findItem(itemId);
-        if (item == null) {
+        if (!category.getItems().containsKey(itemId)) {
             throw new ItemNotFoundException();
         }
 
-        return DetailedItemDto.from(item);
+        return DetailedItemDto.from(category.getItems().get(itemId));
     }
 
     public Category save(Category category) {
