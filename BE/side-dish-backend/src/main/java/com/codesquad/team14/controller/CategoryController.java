@@ -6,11 +6,13 @@ import com.codesquad.team14.dto.ItemDto;
 import com.codesquad.team14.service.CategoryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/banchan")
 public class CategoryController {
 
     private final CategoryService categoryService;
