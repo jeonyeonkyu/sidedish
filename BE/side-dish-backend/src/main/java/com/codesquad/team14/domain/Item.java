@@ -10,6 +10,7 @@ import java.util.Objects;
 public class Item {
     private static final String DELIVERY_FEE_POLICY = "2,500원 (40,000원 이상 구매 시 무료)";
     private static final String SEPARATOR = ",";
+    private static final int TOP_IMAGE_INDEX = 0;
 
     @Id
     private Long id;
@@ -115,7 +116,7 @@ public class Item {
         if (this.images == null) {
             return "";
         }
-        return this.images.split(SEPARATOR)[0];
+        return this.images.split(SEPARATOR)[TOP_IMAGE_INDEX];
     }
 
     public List<String> getImages() {
