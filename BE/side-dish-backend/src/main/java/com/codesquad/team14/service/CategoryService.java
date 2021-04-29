@@ -49,7 +49,40 @@ public class CategoryService {
         return DetailedItemDto.from(category.getItems().get(itemId));
     }
 
+    public DetailedItemDto readDetailed(Long itemId) {
+        for (Category category : categoryRepository.findAll()) {
+            if (category.getItems().containsKey(itemId)) {
+                return DetailedItemDto.from(category.getItems().get(itemId));
+            }
+        }
+
+        throw new ItemNotFoundException();
+    }
+
     public Category save(Category category) {
         return categoryRepository.save(category);
+    }
+
+    public Category findCategoryByName(String name) {
+        return categoryRepository.findCategoryByName(name).orElseThrow(CategoryNotFoundException::new);
+    }
+
+    public void insertData(Category category, List<RequestItemDto> requestItemDtoList) {
+        for (RequestItemDto itemDto : requestItemDtoList) {
+            if (itemDto.getN_price().isEmpty()) {
+                itemDto.setN_price("0");
+            }
+            Item item = Item.of(itemDto.getTitle(),
+                    itemDto.getDescription(),
+                    itemDto.getNormalPrice(),
+                    itemDto.getSalePrice(),
+                    itemDto.getBadgeInString(),
+                    itemDto.getDeliveryTypeInString(),
+                    itemDto.getImages(),
+                    category.getId());
+            category.addItem(item);
+        }
+
+        save(category);
     }
 }

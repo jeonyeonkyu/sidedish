@@ -21,14 +21,22 @@ public class Item {
     private String badges;
     private String deliveryTypes;
     private String images;
-    private String category;
+    private Long category;
 
-    public Item(String title, String description, int normalPrice, int salePrice, String category) {
+    public Item(String title, String description, int normalPrice, int salePrice, String badges, String deliveryTypes, String images, Long category) {
         this.title = title;
         this.description = description;
         this.normalPrice = normalPrice;
         this.salePrice = salePrice;
+        this.badges = badges;
+        this.deliveryTypes = deliveryTypes;
+        this.images = images;
         this.category = category;
+    }
+
+    public static Item of(String title, String description, int normalPrice, int salePrice, String badges, String deliveryTypes,
+                          String images, Long categoryId) {
+        return new Item(title, description, normalPrice, salePrice, badges, deliveryTypes, images, categoryId);
     }
 
     public Long getId() {
@@ -91,11 +99,11 @@ public class Item {
         this.images = images;
     }
 
-    public String getCategory() {
+    public Long getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Long category) {
         this.category = category;
     }
 
