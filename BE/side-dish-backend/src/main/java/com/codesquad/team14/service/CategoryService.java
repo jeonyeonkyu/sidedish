@@ -24,8 +24,7 @@ public class CategoryService {
     }
 
     public List<CategoryDTO> readAllBest() {
-        List<Category> bestCategories = categoryRepository.findAllByBestIsTrue();
-        return bestCategories.stream()
+        return categoryRepository.findAllByBestIsTrue().stream()
                 .map(CategoryDTO::from)
                 .collect(Collectors.toList());
     }
