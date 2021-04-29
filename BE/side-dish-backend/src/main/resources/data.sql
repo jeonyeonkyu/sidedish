@@ -7,7 +7,10 @@ INSERT INTO category(name, best) values
                                         ('SIDE', FALSE),
                                         ('할인특가 세트상품', TRUE),
                                         ('풍성한 고기반찬', TRUE),
-                                        ('편리한 반찬세트', TRUE);
+                                        ('바다향가득 반찬', TRUE),
+                                        ('편리한 반찬세트', TRUE),
+                                        ('간단한 덮밥요리', TRUE),
+                                        ('우리아이 영양반찬', TRUE);
 
 INSERT INTO item(title, description, normal_price, sale_price,badges,delivery_types,images, category) values
 ('[아내가쉐프했다]풍성한 고기반찬 찜닭요리','아내의쉐프가 자신 있게 만들어서 이름도 아쉐찜닭',10900,9900,'EVENT, LAUNCHING','DOMESTIC_POST, NEXT_DAY'
