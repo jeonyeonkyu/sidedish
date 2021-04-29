@@ -14,7 +14,7 @@ public class Category {
     private String name;
     private boolean best;
 
-    @MappedCollection(idColumn = "category", keyColumn = "id")
+    @MappedCollection(keyColumn = "item_id")
     private Map<Long, Item> items = new HashMap<>();
 
     public Category(String name) {

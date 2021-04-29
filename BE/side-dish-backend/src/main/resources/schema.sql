@@ -13,5 +13,6 @@ CREATE TABLE IF NOT EXISTS `sidedish`.`item` (
 		`badges` VARCHAR(45) NULL,
 		`delivery_types` VARCHAR(200) NULL,
 		`images` VARCHAR(2000) NULL,
+		`item_id` BIGINT,
 		`category` INT REFERENCES category(`id`)
 );
