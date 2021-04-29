@@ -35,9 +35,9 @@ public class CategoryController {
         return categoryService.readAllByCategoryName(categoryName);
     }
 
-    @GetMapping("/{categoryName}/{itemId}")
-    public DetailedItemDto readDetailedItem(@PathVariable String categoryName, @PathVariable Long itemId) {
-        return categoryService.readDetailedItem(categoryName, itemId);
+    @GetMapping("/detail/{itemId}")
+    public DetailedItemDto readDetailed(@PathVariable Long itemId) {
+        return categoryService.readDetailed(itemId);
     }
 
     @PostMapping("/main")
