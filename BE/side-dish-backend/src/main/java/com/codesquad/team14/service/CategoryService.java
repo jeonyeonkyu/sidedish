@@ -77,4 +77,11 @@ public class CategoryService {
 
         save(category);
     }
+
+    public void insertBestData(List<RequestBestItemDTO> bestCategoryItem) {
+        for (RequestBestItemDTO categoryDTO : bestCategoryItem) {
+            Category category = categoryRepository.findById(categoryDTO.getCategory_id()).orElseThrow(CategoryNotFoundException::new);
+            insertData(category, categoryDTO.getItems());
+        }
+    }
 }
