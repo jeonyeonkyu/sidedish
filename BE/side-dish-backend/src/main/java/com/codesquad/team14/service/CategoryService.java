@@ -5,23 +5,26 @@ import com.codesquad.team14.domain.Item;
 import com.codesquad.team14.dto.CategoryDTO;
 import com.codesquad.team14.dto.DetailedItemDTO;
 import com.codesquad.team14.dto.ItemDTO;
+import com.codesquad.team14.dto.requestDTO.RequestBestItemDTO;
 import com.codesquad.team14.dto.requestDTO.RequestItemDTO;
 import com.codesquad.team14.exception.CategoryNotFoundException;
 import com.codesquad.team14.exception.ItemNotFoundException;
 import com.codesquad.team14.repository.CategoryRepository;
+import com.codesquad.team14.repository.ItemRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final ItemRepository itemRepository;
 
-    public CategoryService(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository, ItemRepository itemRepository) {
         this.categoryRepository = categoryRepository;
+        this.itemRepository = itemRepository;
     }
 
     public List<CategoryDTO> readAllBest() {
@@ -60,9 +63,6 @@ public class CategoryService {
 
     public void insertData(Category category, List<RequestItemDTO> requestItemDtoList) {
         for (RequestItemDTO itemDto : requestItemDtoList) {
-            if (itemDto.getN_price().isEmpty()) {
-                itemDto.setN_price("0");
-            }
             Item item = Item.of(itemDto.getTitle(),
                     itemDto.getDescription(),
                     itemDto.getNormalPrice(),
@@ -71,7 +71,8 @@ public class CategoryService {
                     itemDto.getDeliveryTypeInString(),
                     itemDto.getImages(),
                     category.getId());
-            category.addItem(item);
+            category.addItem(itemRepository.save(item));
+            System.out.println(item.toString());
         }
 
         save(category);
