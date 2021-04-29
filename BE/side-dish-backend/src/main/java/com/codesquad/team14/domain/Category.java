@@ -1,8 +1,10 @@
 package com.codesquad.team14.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Category {
 
@@ -10,7 +12,9 @@ public class Category {
     private Long id;
     private String name;
     private boolean best;
-    private Set<Item> items;
+
+    @MappedCollection(idColumn = "category", keyColumn = "id")
+    private Map<Long, Item> items = new HashMap<>();
 
     public Category(String name) {
         this.name = name;
@@ -28,7 +32,7 @@ public class Category {
         return best;
     }
 
-    public Set<Item> getItems() {
+    public Map<Long, Item> getItems() {
         return items;
     }
 
@@ -41,21 +45,15 @@ public class Category {
     }
 
     public void addItem(Item item) {
-        items.add(item);
+        items.put(item.getId(), item);
     }
 
     public void removeItem(Item item) {
-        items.remove(item);
+        items.remove(item.getId());
     }
 
-    public Item findItem(Long itemId) {
-        for (Item item : items) {
-            if (item.getId().equals(itemId)) {
-                return item;
-            }
-        }
-
-        return null;
+    public void updateItem(Item item) {
+        items.replace(item.getId(), item);
     }
 
     @Override
