@@ -20,4 +20,11 @@ public class CustomExceptionHandler {
                 .status(e.getErrorCode().getHttpStatus())
                 .body(ErrorResponse.from(e.getErrorCode()));
     }
+
+    @ExceptionHandler(CategoryNotBestException.class)
+    public ResponseEntity<ErrorResponse> handleCategoryNotBestException(CategoryNotBestException e) {
+        return ResponseEntity
+                .status(e.getErrorCode().getHttpStatus())
+                .body(ErrorResponse.from(e.getErrorCode()));
+    }
 }
