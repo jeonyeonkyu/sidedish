@@ -4,7 +4,9 @@ import com.codesquad.team14.domain.Item;
 
 import java.util.List;
 
-public class DetailedItemDto {
+public class DetailedItemDTO {
+    private static final int POINT_PERCENTAGE = 100;
+
     private final Long id;
     private final String topImage;
     private final List<String> thumbImages;
@@ -15,7 +17,7 @@ public class DetailedItemDto {
     private final int salePrice;
     private final int point;
 
-    public DetailedItemDto(Long id, String topImage, List<String> thumbImages, String description, String deliveryInfo,
+    public DetailedItemDTO(Long id, String topImage, List<String> thumbImages, String description, String deliveryInfo,
                            String deliveryFee, int normalPrice, int salePrice, int point) {
         this.id = id;
         this.topImage = topImage;
@@ -28,8 +30,8 @@ public class DetailedItemDto {
         this.point = point;
     }
 
-    public static DetailedItemDto from(Item item) {
-        return new DetailedItemDto(
+    public static DetailedItemDTO from(Item item) {
+        return new DetailedItemDTO(
                 item.getId(),
                 item.getTopImage(),
                 item.getImages(),
@@ -38,7 +40,7 @@ public class DetailedItemDto {
                 Item.getDeliveryFeePolicy(),
                 item.getNormalPrice(),
                 item.getSalePrice(),
-                item.getSalePrice() / 100
+                item.getSalePrice() / POINT_PERCENTAGE
         );
     }
 

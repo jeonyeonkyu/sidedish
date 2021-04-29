@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CategoryDto {
+public class CategoryDTO {
 
     @JsonProperty("category_id")
     private Long id;
@@ -15,17 +15,17 @@ public class CategoryDto {
     private String name;
 
     @JsonProperty("items")
-    private Set<ItemDto> items;
+    private Set<ItemDTO> items;
 
-    private CategoryDto(Long id, String name, Set<ItemDto> items) {
+    private CategoryDTO(Long id, String name, Set<ItemDTO> items) {
         this.id = id;
         this.name = name;
         this.items = items;
     }
 
-    public static CategoryDto from(Category category) {
-        Set<ItemDto> itemDtos = category.getItems().values().stream().map(ItemDto::from).collect(Collectors.toSet());
-        return new CategoryDto(
+    public static CategoryDTO from(Category category) {
+        Set<ItemDTO> itemDtos = category.getItems().values().stream().map(ItemDTO::from).collect(Collectors.toSet());
+        return new CategoryDTO(
                 category.getId(),
                 category.getName(),
                 itemDtos
@@ -40,7 +40,7 @@ public class CategoryDto {
         return name;
     }
 
-    public Set<ItemDto> getItems() {
+    public Set<ItemDTO> getItems() {
         return items;
     }
 }

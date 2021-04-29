@@ -1,8 +1,8 @@
-package com.codesquad.team14.dto.requestDto;
+package com.codesquad.team14.dto.requestDTO;
 
 import java.util.Arrays;
 
-public class RequestItemDto {
+public class RequestItemDTO {
 
     private String detail_hash;
     private String image;

@@ -2,6 +2,7 @@ package com.codesquad.team14;
 
 import com.codesquad.team14.domain.Category;
 import com.codesquad.team14.domain.Item;
+import com.codesquad.team14.exception.CategoryNotFoundException;
 import com.codesquad.team14.repository.CategoryRepository;
 import com.codesquad.team14.service.CategoryService;
 import org.junit.jupiter.api.DisplayName;
@@ -39,29 +40,28 @@ class SideDishBackendApplicationTests {
     @DisplayName("Spring Data JDBC MySQL 연동 확인")
     void readUser() {
         Long id = 1L;
-        Category category = categoryRepository.findById(id).get();
+        Category category = categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
 
-        assertThat(category).isNotNull();
         logger.info("User ID : {} : {}", id, category);
 
         Long id2 = 77L;
-        assertThat(categoryRepository.findById(id2).isPresent()).isFalse();
 
         Iterable<Category> categories = categoryRepository.findAll();
+
+        assertThat(category).isNotNull();
+        assertThat(categoryRepository.findById(id2).isPresent()).isFalse();
         assertThat(((Collection) categories).size()).isGreaterThanOrEqualTo(2);
         assertThat(categoryRepository.count()).isGreaterThan(3);
-//
-//        Set<Item> item = category.getItems();
-//        assertThat(item.size()).isPositive();
     }
 
     @Test
     @DisplayName("카테고리-아이템")
     void itemTest() {
-        Category category = categoryRepository.findCategoryByName("main").get();
-        assertThat(category.getId()).isEqualTo(1L);
+        Category category = categoryRepository.findCategoryByName("main").orElseThrow(CategoryNotFoundException::new);
 
         Item item = category.getItems().get(5L);
+
+        assertThat(category.getId()).isEqualTo(1L);
         assertThat(item.getId()).isNotNull();
     }
 }
