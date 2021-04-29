@@ -1,7 +1,6 @@
 package com.codesquad.team14.dto;
 
 import com.codesquad.team14.domain.Category;
-import com.codesquad.team14.domain.Item;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Set;
@@ -25,10 +24,7 @@ public class CategoryDto {
     }
 
     public static CategoryDto from(Category category) {
-        Set<Item> items = category.getItems();
-        Set<ItemDto> itemDtos = items.stream()
-                .map(ItemDto::from)
-                .collect(Collectors.toSet());
+        Set<ItemDto> itemDtos = category.getItems().values().stream().map(ItemDto::from).collect(Collectors.toSet());
         return new CategoryDto(
                 category.getId(),
                 category.getName(),

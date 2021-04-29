@@ -50,8 +50,18 @@ class SideDishBackendApplicationTests {
         Iterable<Category> categories = categoryRepository.findAll();
         assertThat(((Collection) categories).size()).isGreaterThanOrEqualTo(2);
         assertThat(categoryRepository.count()).isGreaterThan(3);
+//
+//        Set<Item> item = category.getItems();
+//        assertThat(item.size()).isPositive();
+    }
 
-        Set<Item> item = category.getItems();
-        assertThat(item.size()).isPositive();
+    @Test
+    @DisplayName("카테고리-아이템")
+    void itemTest() {
+        Category category = categoryRepository.findCategoryByName("main").get();
+        assertThat(category.getId()).isEqualTo(1L);
+
+        Item item = category.getItems().get(5L);
+        assertThat(item.getId()).isNotNull();
     }
 }
