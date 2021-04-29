@@ -2,7 +2,7 @@ package com.codesquad.team14.dto;
 
 import com.codesquad.team14.domain.Item;
 
-public class ItemDto {
+public class ItemDTO {
     private Long id;
     private String topImage;
     private String deliveryTypes;
@@ -12,7 +12,7 @@ public class ItemDto {
     private int salePrice;
     private String badges;
 
-    private ItemDto(Long id, String image, String deliveryTypes, String title,
+    private ItemDTO(Long id, String image, String deliveryTypes, String title,
                     String description, int normalPrice, int salePrice, String badges) {
         this.id = id;
         this.topImage = image;
@@ -24,8 +24,8 @@ public class ItemDto {
         this.badges = badges;
     }
 
-    public static ItemDto from(Item item) {
-        return new ItemDto(
+    public static ItemDTO from(Item item) {
+        return new ItemDTO(
                 item.getId(),
                 item.getTopImage(),
                 item.getDeliveryTypes(),
