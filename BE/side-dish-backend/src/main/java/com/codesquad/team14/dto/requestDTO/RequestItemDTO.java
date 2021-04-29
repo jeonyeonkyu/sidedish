@@ -18,8 +18,6 @@ public class RequestItemDTO {
     private String point;
     private String delivery_info;
     private String delivery_fee;
-    private String[] prices;
-    private String[] detail_section;
 
     public String getDetail_hash() {
         return detail_hash;
@@ -87,14 +85,6 @@ public class RequestItemDTO {
 
     public String getDelivery_fee() {
         return delivery_fee;
-    }
-
-    public String[] getPrices() {
-        return prices;
-    }
-
-    public String[] getDetail_section() {
-        return detail_section;
     }
 
     public int getNormalPrice() {
