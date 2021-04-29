@@ -12,6 +12,7 @@ import com.codesquad.team14.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,23 +40,14 @@ public class CategoryService {
         return category.getItems().values().stream().map(ItemDTO::from).collect(Collectors.toList());
     }
 
-    public DetailedItemDTO readDetailedItem(String categoryName, Long itemId) {
-        Category category = categoryRepository.findCategoryByName(categoryName).orElseThrow(CategoryNotFoundException::new);
-        if (!category.getItems().containsKey(itemId)) {
-            throw new ItemNotFoundException();
-        }
-
-        return DetailedItemDTO.from(category.getItems().get(itemId));
-    }
-
     public DetailedItemDTO readDetailed(Long itemId) {
         for (Category category : categoryRepository.findAll()) {
             if (category.getItems().containsKey(itemId)) {
-                return DetailedItemDTO.from(category.getItems().get(itemId));
+                return DetailedItemDTO.from(category.getItem(itemId).orElseThrow(ItemNotFoundException::new));
             }
         }
 
-        throw new ItemNotFoundException();
+        return null;
     }
 
     public Category save(Category category) {

@@ -5,6 +5,7 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class Category {
 
@@ -54,6 +55,10 @@ public class Category {
 
     public void updateItem(Item item) {
         items.replace(item.getId(), item);
+    }
+
+    public Optional<Item> getItem(Long itemId) {
+        return Optional.ofNullable(items.get(itemId));
     }
 
     @Override
