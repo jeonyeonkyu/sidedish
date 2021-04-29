@@ -7,6 +7,7 @@ import com.codesquad.team14.dto.DetailedItemDTO;
 import com.codesquad.team14.dto.ItemDTO;
 import com.codesquad.team14.dto.requestDTO.RequestBestItemDTO;
 import com.codesquad.team14.dto.requestDTO.RequestItemDTO;
+import com.codesquad.team14.exception.CategoryNotBestException;
 import com.codesquad.team14.exception.CategoryNotFoundException;
 import com.codesquad.team14.exception.ItemNotFoundException;
 import com.codesquad.team14.repository.CategoryRepository;
@@ -18,6 +19,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {
+
+    private static final int BEST_CATEGORY_ID_MIN = 4;
+    private static final int BEST_CATEGORY_ID_MAX = 9;
 
     private final CategoryRepository categoryRepository;
     private final ItemRepository itemRepository;
@@ -34,6 +38,10 @@ public class CategoryService {
     }
 
     public CategoryDTO readOneBestCategory(Long categoryId) {
+        if (!(categoryId >= BEST_CATEGORY_ID_MIN && categoryId <= BEST_CATEGORY_ID_MAX)) {
+            throw new CategoryNotBestException();
+        }
+
         Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFoundException::new);
         return CategoryDTO.from(category);
     }
