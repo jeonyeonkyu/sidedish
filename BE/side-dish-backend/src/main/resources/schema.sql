@@ -1,3 +1,6 @@
+drop table IF EXISTS `item`;
+drop table IF EXISTS `category`;
+
 CREATE TABLE IF NOT EXISTS `sidedish`.`category` (
                                                      `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
                                                      `name` VARCHAR(45) NOT NULL,
