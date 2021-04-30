@@ -68,7 +68,8 @@ public class RequestItemDTO {
     }
 
     public String getImages() {
-        return Arrays.toString(thumb_images);
+        String image = Arrays.toString(thumb_images);
+        return image.substring(1, image.length() - 1);
     }
 
     public String getProduct_description() {
