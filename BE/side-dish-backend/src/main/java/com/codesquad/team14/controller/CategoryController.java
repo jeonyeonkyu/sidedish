@@ -4,6 +4,7 @@ import com.codesquad.team14.domain.Category;
 import com.codesquad.team14.dto.CategoryDTO;
 import com.codesquad.team14.dto.DetailedItemDTO;
 import com.codesquad.team14.dto.ItemDTO;
+import com.codesquad.team14.dto.requestDTO.RequestBestItemDTO;
 import com.codesquad.team14.dto.requestDTO.RequestItemDTO;
 import com.codesquad.team14.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
@@ -42,13 +43,13 @@ public class CategoryController {
 
     @PostMapping("/main")
     public void addMain(@RequestBody List<RequestItemDTO> mainItems) {
-        Category category = categoryService.findCategoryByName("main");
+        Category category = categoryService.findCategoryByName("MAIN");
         categoryService.insertData(category, mainItems);
     }
 
     @PostMapping("/soup")
     public void addSoup(@RequestBody List<RequestItemDTO> soupItems) {
-        Category category = categoryService.findCategoryByName("soup");
+        Category category = categoryService.findCategoryByName("SOUP");
         categoryService.insertData(category, soupItems);
     }
 
@@ -56,5 +57,10 @@ public class CategoryController {
     public void addSide(@RequestBody List<RequestItemDTO> sideItems) {
         Category category = categoryService.findCategoryByName("side");
         categoryService.insertData(category, sideItems);
+    }
+
+    @PostMapping("/best")
+    public void addBest(@RequestBody List<RequestBestItemDTO> bests) {
+        categoryService.insertBestData(bests);
     }
 }

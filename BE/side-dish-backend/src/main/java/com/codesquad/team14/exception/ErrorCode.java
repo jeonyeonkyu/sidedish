@@ -5,7 +5,8 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     ITEM_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 품목이 존재하지 않습니다."),
-    CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 카테고리가 존재하지 않습니다.");
+    CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 카테고리가 존재하지 않습니다."),
+    CATEGORY_NOT_BEST(HttpStatus.NOT_FOUND, "해당 카테고리는 베스트 카테고리에 해당되지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final String message;
